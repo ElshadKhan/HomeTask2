@@ -1,0 +1,37 @@
+import {Request, Response} from "express";
+import {postRepository} from "../repositories/postRepository";
+
+export const postControllers = {
+    async getPosts(req: Request, res: Response) {
+        const posts = await postRepository.findPosts()
+        return posts
+    },
+    async getPostById(req: Request, res: Response) {
+        const post = await postRepository.findPostById(req.params.id)
+        if (post) {
+            res.send(post)
+        } else {
+            res.send(404)
+        }
+    },
+    async createPost(req: Request, res: Response) {
+        const newPost = await postRepository.createPost(req.body.title, req.body.shortDescription, req.body.content, req.body.blogId)
+        return newPost
+    },
+    async updatePost(req: Request, res: Response) {
+        const post = await postRepository.updatePost(req.params.id, req.body.title, req.body.shortDescription, req.body.content, req.body.blogId);
+        if (post) {
+            res.send(204)
+        } else {
+            res.send(400)
+        }
+    },
+    async deletePost(req: Request, res: Response) {
+        const post = await postRepository.deletePost(req.params.id);
+        if (post) {
+            res.send(204)
+        } else {
+            res.send(400)
+        }
+    }
+}
