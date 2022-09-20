@@ -1,4 +1,5 @@
 import {NextFunction, Request, Response} from "express";
+import {blogs} from "../../repositories/blogRepository";
 
 export const postInputControlMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
@@ -9,6 +10,8 @@ export const postInputControlMiddleware = (req: Request, res: Response, next: Ne
     const content = req.body.content
 
     const blogId = req.body.blogId
+
+    const blog = blogs.find(b => b.id === blogId);
 
     const errors: {message: string, field: string}[] = []
 
@@ -21,7 +24,7 @@ export const postInputControlMiddleware = (req: Request, res: Response, next: Ne
     if(!content || typeof content !== "string" || !content.trim() || content.length > 1000) {
         errors.push({message: 'content is wrong', field: 'content'})
     }
-    if(typeof blogId !== "string" || !blogId.trim()) {
+    if(!blog || typeof blogId !== "string") {
         errors.push({message: 'blogId is wrong', field: 'blogId'})
     }
     if (errors.length) {

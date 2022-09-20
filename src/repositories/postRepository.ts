@@ -23,14 +23,14 @@ export const postRepository = {
         content: string,
         blogId: string
     ) {
-        const blogName: any = blogs.find(b => b.id === blogId);
+        const blog: any = blogs.find(b => b.id === blogId);
         const newPost: PostDbType = {
             id: String(+(new Date())),
             title: title,
             shortDescription: shortDescription,
             content: content,
             blogId: blogId,
-            blogName: blogName.name
+            blogName: blog.name
         }
         posts.push(newPost)
         return newPost

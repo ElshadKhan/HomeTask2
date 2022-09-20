@@ -4,26 +4,26 @@ import {postRepository} from "../repositories/postRepository";
 export const postControllers = {
     async getPosts(req: Request, res: Response) {
         const posts = await postRepository.findPosts()
-        return posts
+        res.status(200).send(posts)
     },
     async getPostById(req: Request, res: Response) {
         const post = await postRepository.findPostById(req.params.id)
         if (post) {
-            res.send(post)
+            res.status(200).send(post)
         } else {
             res.send(404)
         }
     },
     async createPost(req: Request, res: Response) {
         const newPost = await postRepository.createPost(req.body.title, req.body.shortDescription, req.body.content, req.body.blogId)
-        return newPost
+        res.status(201).send(newPost)
     },
     async updatePost(req: Request, res: Response) {
         const post = await postRepository.updatePost(req.params.id, req.body.title, req.body.shortDescription, req.body.content, req.body.blogId);
         if (post) {
             res.send(204)
         } else {
-            res.send(400)
+            res.send(404)
         }
     },
     async deletePost(req: Request, res: Response) {
@@ -31,7 +31,7 @@ export const postControllers = {
         if (post) {
             res.send(204)
         } else {
-            res.send(400)
+            res.send(404)
         }
     }
 }
