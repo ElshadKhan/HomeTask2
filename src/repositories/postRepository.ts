@@ -8,7 +8,14 @@ type PostDbType = {
     blogId: string
     blogName: string
 }
-let posts: PostDbType[] = []
+let posts = [{
+    id: "string",
+    title: "string",
+    shortDescription: "string",
+    content: "string",
+    blogId: "1663706876426",
+    blogName: "string"
+}]
 export const postRepository = {
     findPosts() {
         return posts
