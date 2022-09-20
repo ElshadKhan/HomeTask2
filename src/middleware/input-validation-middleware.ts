@@ -6,9 +6,6 @@ export const inputBlogValidationMiddleware = (req: Request, res: Response, next:
     const loginPass = 'admin:qwerty'
     //const base64 = new Buffer(loginPass, 'base64')
     const validAuthHeader = 'Basic YWRtaW46cXdlcnR5'
-    console.log(validAuthHeader)
-    console.log(authHeader)
-
 
     if (authHeader !== validAuthHeader) {
         res.sendStatus(401);
