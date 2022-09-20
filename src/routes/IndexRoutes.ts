@@ -4,5 +4,5 @@ import {postRouter} from "./postRouter";
 
 export const router = Router({})
 
-router.use('/blogpage', blogRouter)
-router.use('/postpage', postRouter)
+router.use('/blogs', blogRouter)
+router.use('/posts', postRouter)
